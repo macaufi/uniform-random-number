@@ -1,27 +1,36 @@
 {
-  "name": "macaufi-contracts",
-  "version": "0.1.0",
-  "description": "PoolManager Lossless Pool Smart Contracts",
+  "name": "@pooltogether/uniform-random-number",
+  "version": "1.0.0-beta.1",
+  "description": "PoolTogether Solidity Modulo Bias library",
   "main": "index.js",
-  "repository": "git@github.com:macaufi/macaufi-contracts.git",
-  "author": "VelKovacevic",
+  "repository": "git@github.com:pooltogether/pooltogether-contracts.git",
+  "author": "Brendan Asselstine brendan@pooltogether.com",
   "scripts": {
     "test": "truffle test --migrations_directory ./migrations/empty",
     "coverage": "COVERAGE=true truffle run coverage --migrations_directory ./migrations/empty",
-    "compile": "truffle compile"
+    "compile": "truffle compile",
+    "prepack": "yarn compile && truffle-extract -b build/contracts -o abis",
+    "postpublish": "PACKAGE_VERSION=$(./scripts/package-version.sh) && git tag -ae v$PACKAGE_VERSION && git push --tags"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@openzeppelin/cli": "2.6.0",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "solc": "0.5.12",
-    "solidity-coverage": "0.7.0-beta.2",
-    "@openzeppelin/cli": "2.6.0",
     "eth-gas-reporter": "0.2.0",
     "ethers": "^4.0.40",
     "ganache-cli": "6.7.0",
     "mocha-junit-reporter": "1.23.1",
-    "truffle": "5.0.42"
-  }
+    "solc": "0.6.4",
+    "solidity-coverage": "0.7.0-beta.2",
+    "truffle": "^5.1.19",
+    "truffle-extract": "pooltogether/truffle-extract"
+  },
+  "files": [
+    "LICENSE",
+    "abis/**",
+    "build/**",
+    ".build-openzeppelin/**",
+    "contracts/**"
+  ]
 }
